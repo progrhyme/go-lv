@@ -1,3 +1,6 @@
+[![latest-tag](https://badgen.net/github/tag/progrhyme/go-lv)](https://github.com/progrhyme/go-lv/releases)
+[![go-test](https://github.com/progrhyme/go-lv/workflows/go-test/badge.svg)](https://github.com/progrhyme/go-lv/actions?query=workflow%3Ago-test)
+
 # go-lv
 
 Package lv implements a simple logging package with filtering level. It
@@ -31,6 +34,10 @@ func main() {
 	logger.Warnf("Something is wrong!")
 }
 ```
+
+# Documenatation
+
+https://pkg.go.dev/github.com/progrhyme/go-lv
 
 # License
 
