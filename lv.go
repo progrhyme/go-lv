@@ -10,7 +10,7 @@
 //
 //     func main() {
 //         name := "Bob"
-//         // lv.SetLevel(lv.Debug) // for debug
+//         // lv.SetLevel(lv.LDebug) // for debug
 //         lv.Infof("Hello, %s!", name)
 //     }
 //
@@ -23,7 +23,7 @@
 //     )
 //
 //     func main() {
-//         logger := lv.New(os.Stderr, lv.Warning, log.LstdFlags)
+//         logger := lv.New(os.Stderr, lv.LWarning, log.LstdFlags)
 //         logger.Warnf("Something is wrong!")
 //     }
 package lv

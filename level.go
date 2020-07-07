@@ -9,12 +9,12 @@ import (
 type Level int
 
 const (
-	Trace Level = iota + 1
-	Debug
-	Info // Default level for package-level logger
-	Notice
-	Warning
-	Error
+	LTrace Level = iota + 1
+	LDebug
+	LInfo // Default level for package-level logger
+	LNotice
+	LWarning
+	LError
 )
 
 var labelToLevel map[string]Level
@@ -23,24 +23,24 @@ var labelToLevel map[string]Level
 //
 // Examples:
 //
-//     Debug.String()  //=> "Debug"
-//     Notice.String() //=> "Notice"
+//     LDebug.String()  //=> "DEBUG"
+//     LNotice.String() //=> "NOTICE"
 func (lv Level) String() string {
 	switch lv {
-	case Trace:
-		return "Trace"
-	case Debug:
-		return "Debug"
-	case Info:
-		return "Info"
-	case Notice:
-		return "Notice"
-	case Warning:
-		return "Warning"
-	case Error:
-		return "Error"
+	case LTrace:
+		return "TRACE"
+	case LDebug:
+		return "DEBUG"
+	case LInfo:
+		return "INFO"
+	case LNotice:
+		return "NOTICE"
+	case LWarning:
+		return "WARNING"
+	case LError:
+		return "ERROR"
 	default:
-		return "Unknown"
+		return "UNKNOWN"
 	}
 }
 
@@ -48,8 +48,8 @@ func (lv Level) String() string {
 //
 // Examples:
 //
-//     lv.LabelToLevel("trace")     //=> lv.Trace
-//     lv.LabelToLevel("warning")   //=> lv.Warning
+//     lv.LabelToLevel("trace")     //=> lv.LTrace
+//     lv.LabelToLevel("warning")   //=> lv.LWarning
 //     lv.LabelToLevel("undefined") //=> 0
 func LabelToLevel(label string) Level {
 	if labelToLevel == nil {
@@ -60,7 +60,7 @@ func LabelToLevel(label string) Level {
 
 func initLabelToLevel() {
 	labelToLevel = make(map[string]Level)
-	for i := Trace; i.String() != "Unknown"; i++ {
+	for i := LTrace; i.String() != "UNKNOWN"; i++ {
 		labelToLevel[strings.ToLower(i.String())] = i
 	}
 }
