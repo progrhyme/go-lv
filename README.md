@@ -40,6 +40,10 @@ func main() {
 
 https://pkg.go.dev/github.com/progrhyme/go-lv
 
+# Limitation
+
+No support for structured logging.
+
 # License
 
 The MIT License.
