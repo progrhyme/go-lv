@@ -1,7 +1,10 @@
-// Package lv implements a simple logging package with filtering level.
-// It delegates output functionality to log.Logger from standard 'log' package.
+// Package lv implements a simple logger with filtering level.
 //
-// Examples:
+// This package extends the standard package log and aimed to be minimal.
+//
+// Usage
+//
+// Using package-level logger:
 //
 //     import "github.com/progrhyme/go-lv"
 //
@@ -11,7 +14,7 @@
 //         lv.Infof("Hello, %s!", name)
 //     }
 //
-// Creating a Logger:
+// Creating a logger:
 //
 //     import (
 //         "log"
@@ -25,6 +28,7 @@
 //     }
 package lv
 
+// Loggable determines interface of Logger
 type Loggable interface {
 	Printf(string, ...interface{})
 	Tracef(string, ...interface{})

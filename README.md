@@ -3,12 +3,13 @@
 
 # go-lv
 
-Package lv implements a simple logging package with filtering level. It
-delegates output functionality to log.Logger from standard 'log' package.
+Package lv implements a simple logger with filtering level.
+
+This package extends the standard package log and aimed to be minimal.
 
 # Usage
 
-Using package Logger:
+Using package-level logger:
 
 ```go
 import "github.com/progrhyme/go-lv"
@@ -20,7 +21,7 @@ func main() {
 }
 ```
 
-Creating a Logger:
+Creating a logger:
 
 ```go
 import (

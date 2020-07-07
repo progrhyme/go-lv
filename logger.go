@@ -65,7 +65,7 @@ func (self *Logger) Errorf(fmt string, v ...interface{}) {
 	self.writef(Error, fmt, v...)
 }
 
-// Calls 'Fatalf' of standard log package.
+// Fatalf calls log.Fatalf() in standard package log.
 func (self *Logger) Fatalf(fmt string, v ...interface{}) {
 	self.Logger.Fatalf(fmt, v...)
 }

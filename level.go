@@ -11,7 +11,7 @@ type Level int
 const (
 	Trace Level = iota + 1
 	Debug
-	Info // Default level for package Logger
+	Info // Default level for package-level logger
 	Notice
 	Warning
 	Error
@@ -19,6 +19,12 @@ const (
 
 var labelToLevel map[string]Level
 
+// String returns human-readable string of log level.
+//
+// Examples:
+//
+//     Debug.String()  //=> "Debug"
+//     Notice.String() //=> "Notice"
 func (lv Level) String() string {
 	switch lv {
 	case Trace:
@@ -41,6 +47,7 @@ func (lv Level) String() string {
 // LabelToLevel returns Level by given label.
 //
 // Examples:
+//
 //     lv.LabelToLevel("trace")     //=> lv.Trace
 //     lv.LabelToLevel("warning")   //=> lv.Warning
 //     lv.LabelToLevel("undefined") //=> 0
