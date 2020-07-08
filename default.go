@@ -59,12 +59,17 @@ func Noticef(format string, v ...interface{}) {
 
 // Warning level logging using package-level logger.
 func Warnf(format string, v ...interface{}) {
-	getDefaultLogger().writef(LWarning, format, v...)
+	getDefaultLogger().writef(LWarn, format, v...)
 }
 
 // Error level logging using package-level logger.
 func Errorf(format string, v ...interface{}) {
 	getDefaultLogger().writef(LError, format, v...)
+}
+
+// Critical level logging using package-level logger.
+func Criticalf(format string, v ...interface{}) {
+	getDefaultLogger().writef(LCritical, format, v...)
 }
 
 // Fatalf calls log.Fatalf() in standard package log through package-level logger.

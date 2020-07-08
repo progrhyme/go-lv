@@ -52,12 +52,17 @@ func (self *Logger) Noticef(format string, v ...interface{}) {
 
 // Warning level logging.
 func (self *Logger) Warnf(format string, v ...interface{}) {
-	self.writef(LWarning, format, v...)
+	self.writef(LWarn, format, v...)
 }
 
 // Error level logging.
 func (self *Logger) Errorf(format string, v ...interface{}) {
 	self.writef(LError, format, v...)
+}
+
+// Critical level logging.
+func (self *Logger) Criticalf(format string, v ...interface{}) {
+	self.writef(LCritical, format, v...)
 }
 
 // Fatalf calls log.Fatalf() in standard package log.
