@@ -37,5 +37,6 @@ type Loggable interface {
 	Noticef(string, ...interface{})
 	Warnf(string, ...interface{})
 	Errorf(string, ...interface{})
+	Criticalf(string, ...interface{})
 	Fatalf(string, ...interface{})
 }
