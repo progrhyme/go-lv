@@ -1,3 +1,9 @@
+## 0.3.1 (2020-07-09)
+
+Modify:
+
+- Add func `Criticalf()` to `Loggable` interface
+
 ## 0.3.0 (2020-07-09)
 
 Enhance:  ([#2](https://github.com/progrhyme/go-lv/pull/2))
