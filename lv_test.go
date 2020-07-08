@@ -14,33 +14,33 @@ func TestLoggable(t *testing.T) {
 		t.Errorf("defaultLogger is not Loggable")
 	}
 	out := &strings.Builder{}
-	if !doLog(New(out, Info, 0)) {
+	if !doLog(New(out, LInfo, 0)) {
 		t.Errorf("New Logger is not Loggable")
 	}
 }
 
 func TestFilteredLogging(t *testing.T) {
 	out := &strings.Builder{}
-	Configure(out, Info, 0)
+	Configure(out, LNotice, 0)
 	msg := "blah blah blah."
-	Debugf(msg)
+	Infof(msg)
 	if out.String() != "" {
 		t.Errorf("Log is not filtered out. Got: %s, Want: %s", out.String(), "")
 	}
 	Warnf(msg)
-	want := fmt.Sprintf("[WARN] %s\n", msg)
+	want := fmt.Sprintf("[WARNING] %s\n", msg)
 	if out.String() != want {
 		t.Errorf("Log is printed. Got: %s, Want: %s", out.String(), want)
 	}
 }
 
-func TestLabelToLevel(t *testing.T) {
+func TestWordToLevel(t *testing.T) {
 	label2Lv := map[string]Level{
-		"trace": Trace, "warning": Warning, "undef": 0,
+		"trace": LTrace, "Info": LInfo, "WARNING": LWarning, "undef": 0,
 	}
 	for label, lv := range label2Lv {
-		if LabelToLevel(label) != lv {
-			t.Errorf("Label unmatch. Got %s, Want %s", LabelToLevel(label), lv)
+		if WordToLevel(label) != lv {
+			t.Errorf("Label unmatch. Got %s, Want %s", WordToLevel(label), lv)
 		}
 	}
 }

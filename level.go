@@ -1,66 +1,65 @@
 package lv
 
-import (
-	"strings"
-)
+import "strings"
 
 // Level represents filtering level.
 // Logger will filter out log data when called with lower level functions
 type Level int
 
 const (
-	Trace Level = iota + 1
-	Debug
-	Info // Default level for package-level logger
-	Notice
-	Warning
-	Error
+	LTrace Level = iota + 1
+	LDebug
+	LInfo // Default level for package-level logger
+	LNotice
+	LWarning
+	LError
 )
 
-var labelToLevel map[string]Level
+var strToLevel map[string]Level
 
 // String returns human-readable string of log level.
 //
 // Examples:
 //
-//     Debug.String()  //=> "Debug"
-//     Notice.String() //=> "Notice"
+//     LDebug.String()  //=> "DEBUG"
+//     LNotice.String() //=> "NOTICE"
 func (lv Level) String() string {
 	switch lv {
-	case Trace:
-		return "Trace"
-	case Debug:
-		return "Debug"
-	case Info:
-		return "Info"
-	case Notice:
-		return "Notice"
-	case Warning:
-		return "Warning"
-	case Error:
-		return "Error"
+	case LTrace:
+		return "TRACE"
+	case LDebug:
+		return "DEBUG"
+	case LInfo:
+		return "INFO"
+	case LNotice:
+		return "NOTICE"
+	case LWarning:
+		return "WARNING"
+	case LError:
+		return "ERROR"
 	default:
-		return "Unknown"
+		return "UNKNOWN"
 	}
 }
 
-// LabelToLevel returns Level by given label.
+// WordToLevel returns Level by given word. Argument word is case-insensitive.
 //
 // Examples:
 //
-//     lv.LabelToLevel("trace")     //=> lv.Trace
-//     lv.LabelToLevel("warning")   //=> lv.Warning
-//     lv.LabelToLevel("undefined") //=> 0
-func LabelToLevel(label string) Level {
-	if labelToLevel == nil {
-		initLabelToLevel()
+//     lv.WordToLevel("trace")     //=> lv.LTrace
+//     lv.WordToLevel("Info")      //=> lv.LInfo
+//     lv.WordToLevel("WARNING")   //=> lv.LWarning
+//     lv.WordToLevel("undefined") //=> 0
+func WordToLevel(word string) Level {
+	if strToLevel == nil {
+		initStringToLevel()
 	}
-	return labelToLevel[label]
+	return strToLevel[strings.ToUpper(word)]
 }
 
-func initLabelToLevel() {
-	labelToLevel = make(map[string]Level)
-	for i := Trace; i.String() != "Unknown"; i++ {
-		labelToLevel[strings.ToLower(i.String())] = i
+func initStringToLevel() {
+	strToLevel = make(map[string]Level)
+	for i := LTrace; i.String() != "UNKNOWN"; i++ {
+		strToLevel[i.String()] = i
 	}
 }
