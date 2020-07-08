@@ -20,23 +20,36 @@ func TestLoggable(t *testing.T) {
 }
 
 func TestFilteredLogging(t *testing.T) {
-	out := &strings.Builder{}
-	Configure(out, LNotice, 0)
 	msg := "blah blah blah."
-	Infof(msg)
-	if out.String() != "" {
-		t.Errorf("Log is not filtered out. Got: %s, Want: %s", out.String(), "")
+	level := LNotice
+	tests := []struct {
+		name   string
+		output string
+		log    func(s string)
+	}{
+		{"Infof", "", func(s string) { Infof(s) }},
+		{"Warnf", fmt.Sprintf("[WARN] %s\n", msg), func(s string) { Warnf(s) }},
+		{"Criticalf", fmt.Sprintf("[CRITICAL] %s\n", msg), func(s string) { Criticalf(s) }},
 	}
-	Warnf(msg)
-	want := fmt.Sprintf("[WARNING] %s\n", msg)
-	if out.String() != want {
-		t.Errorf("Log is printed. Got: %s, Want: %s", out.String(), want)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			out := &strings.Builder{}
+			Configure(out, level, 0)
+			tt.log(msg)
+			if out.String() != tt.output {
+				if tt.output == "" {
+					t.Errorf("Log is not filtered out. Got: %s, Want: %s", out.String(), tt.output)
+				} else {
+					t.Errorf("Output log differs. Got: %s, Want: %s", out.String(), tt.output)
+				}
+			}
+		})
 	}
 }
 
 func TestWordToLevel(t *testing.T) {
 	label2Lv := map[string]Level{
-		"trace": LTrace, "Info": LInfo, "WARNING": LWarning, "undef": 0,
+		"trace": LTrace, "Info": LInfo, "WARN": LWarn, "critical": LCritical, "undef": 0,
 	}
 	for label, lv := range label2Lv {
 		if WordToLevel(label) != lv {

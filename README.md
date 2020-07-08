@@ -31,7 +31,7 @@ import (
 )
 
 func main() {
-	logger := lv.New(os.Stderr, lv.LWarning, log.LstdFlags)
+	logger := lv.New(os.Stderr, lv.LWarn, log.LstdFlags)
 	logger.Warnf("Something is wrong!")
 }
 ```

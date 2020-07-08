@@ -11,8 +11,9 @@ const (
 	LDebug
 	LInfo // Default level for package-level logger
 	LNotice
-	LWarning
+	LWarn
 	LError
+	LCritical
 )
 
 var strToLevel map[string]Level
@@ -33,10 +34,12 @@ func (lv Level) String() string {
 		return "INFO"
 	case LNotice:
 		return "NOTICE"
-	case LWarning:
-		return "WARNING"
+	case LWarn:
+		return "WARN"
 	case LError:
 		return "ERROR"
+	case LCritical:
+		return "CRITICAL"
 	default:
 		return "UNKNOWN"
 	}
@@ -48,7 +51,7 @@ func (lv Level) String() string {
 //
 //     lv.WordToLevel("trace")     //=> lv.LTrace
 //     lv.WordToLevel("Info")      //=> lv.LInfo
-//     lv.WordToLevel("WARNING")   //=> lv.LWarning
+//     lv.WordToLevel("WARN")      //=> lv.LWarn
 //     lv.WordToLevel("undefined") //=> 0
 func WordToLevel(word string) Level {
 	if strToLevel == nil {
