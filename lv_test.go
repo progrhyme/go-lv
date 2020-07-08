@@ -34,13 +34,13 @@ func TestFilteredLogging(t *testing.T) {
 	}
 }
 
-func TestLabelToLevel(t *testing.T) {
+func TestWordToLevel(t *testing.T) {
 	label2Lv := map[string]Level{
-		"trace": LTrace, "warning": LWarning, "undef": 0,
+		"trace": LTrace, "Info": LInfo, "WARNING": LWarning, "undef": 0,
 	}
 	for label, lv := range label2Lv {
-		if LabelToLevel(label) != lv {
-			t.Errorf("Label unmatch. Got %s, Want %s", LabelToLevel(label), lv)
+		if WordToLevel(label) != lv {
+			t.Errorf("Label unmatch. Got %s, Want %s", WordToLevel(label), lv)
 		}
 	}
 }
