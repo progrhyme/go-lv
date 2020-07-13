@@ -7,15 +7,15 @@ import (
 )
 
 func TestLoggable(t *testing.T) {
-	doLog := func(lg Loggable) bool {
+	doLog := func(lg Granular) bool {
 		return true
 	}
 	if !doLog(defaultLogger) {
-		t.Errorf("defaultLogger is not Loggable")
+		t.Errorf("defaultLogger is not granular logger")
 	}
 	out := &strings.Builder{}
 	if !doLog(New(out, LInfo, 0)) {
-		t.Errorf("New Logger is not Loggable")
+		t.Errorf("New Logger is not granular logger")
 	}
 }
 
@@ -28,7 +28,9 @@ func TestFilteredLogging(t *testing.T) {
 		log    func(s string)
 	}{
 		{"Infof", "", func(s string) { Infof(s) }},
+		{"Notice", fmt.Sprintf("[NOTICE] %s\n", msg), func(s string) { Notice(s) }},
 		{"Warnf", fmt.Sprintf("[WARN] %s\n", msg), func(s string) { Warnf(s) }},
+		{"Error", fmt.Sprintf("[ERROR] %s\n", msg), func(s string) { Error(s) }},
 		{"Criticalf", fmt.Sprintf("[CRITICAL] %s\n", msg), func(s string) { Criticalf(s) }},
 	}
 	for _, tt := range tests {
