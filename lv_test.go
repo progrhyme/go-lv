@@ -7,15 +7,15 @@ import (
 )
 
 func TestLoggable(t *testing.T) {
-	doLog := func(lg Loggable) bool {
+	doLog := func(lg Granular) bool {
 		return true
 	}
 	if !doLog(defaultLogger) {
-		t.Errorf("defaultLogger is not Loggable")
+		t.Errorf("defaultLogger is not granular logger")
 	}
 	out := &strings.Builder{}
 	if !doLog(New(out, LInfo, 0)) {
-		t.Errorf("New Logger is not Loggable")
+		t.Errorf("New Logger is not granular logger")
 	}
 }
 

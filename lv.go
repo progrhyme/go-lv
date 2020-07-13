@@ -28,15 +28,27 @@
 //     }
 package lv
 
-// Loggable determines interface of Logger
-type Loggable interface {
+// Minimal defines interface of minimal leveled logger.
+type Minimal interface {
+	GetLevel() Level
+	SetLevel(Level)
 	Printf(string, ...interface{})
-	Tracef(string, ...interface{})
-	Debugf(string, ...interface{})
 	Infof(string, ...interface{})
-	Noticef(string, ...interface{})
-	Warnf(string, ...interface{})
 	Errorf(string, ...interface{})
-	Criticalf(string, ...interface{})
 	Fatalf(string, ...interface{})
+}
+
+// Standard defines interface of standard leveled logger.
+type Standard interface {
+	Minimal
+	Debugf(string, ...interface{})
+	Warnf(string, ...interface{})
+}
+
+// Granular defines interface of full leveled logger.
+type Granular interface {
+	Standard
+	Tracef(string, ...interface{})
+	Noticef(string, ...interface{})
+	Criticalf(string, ...interface{})
 }

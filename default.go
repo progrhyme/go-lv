@@ -2,7 +2,6 @@ package lv
 
 import (
 	"io"
-	"log"
 	"os"
 )
 
@@ -11,18 +10,18 @@ const defaultLevel Level = LInfo
 var defaultLogger *Logger
 
 // Configure sets given properties for package-level logger.
-func Configure(out io.Writer, lv Level, prop int) {
-	defaultLogger = &Logger{Logger: log.New(out, "", prop), Level: lv}
+func Configure(out io.Writer, l Level, prop int) {
+	defaultLogger = New(out, l, prop)
 }
 
 // GetLevel returns filtering level of package-level logger.
 func GetLevel() Level {
-	return getDefaultLogger().Level
+	return getDefaultLogger().GetLevel()
 }
 
 // SetLevel sets filtering level for package-level logger.
-func SetLevel(lv Level) {
-	getDefaultLogger().Level = lv
+func SetLevel(l Level) {
+	getDefaultLogger().SetLevel(l)
 }
 
 func getDefaultLogger() *Logger {

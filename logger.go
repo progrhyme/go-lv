@@ -10,13 +10,23 @@ import (
 // Expanding it with filtering feature.
 type Logger struct {
 	*log.Logger
-	Level Level // Filtering level. Lowers will be filtered out
+	level Level
 }
 
 // New creates a new Logger. The out variable sets the destination to which log data will be written.
 // The prop argument defines the logging properties; it corresponds to 'flags' in 'log' package.
 func New(out io.Writer, l Level, prop int) *Logger {
-	return &Logger{Logger: log.New(out, "", prop), Level: l}
+	return &Logger{Logger: log.New(out, "", prop), level: l}
+}
+
+// GetLevel returns filtering level of self.
+func (self *Logger) GetLevel() (l Level) {
+	return self.level
+}
+
+// SetLevel sets filtering level to self.
+func (self *Logger) SetLevel(l Level) {
+	self.level = l
 }
 
 func (self *Logger) Printf(format string, v ...interface{}) {
@@ -24,7 +34,7 @@ func (self *Logger) Printf(format string, v ...interface{}) {
 }
 
 func (self *Logger) writef(l Level, format string, v ...interface{}) {
-	if l >= self.Level {
+	if l >= self.level {
 		format := fmt.Sprintf("[%s] %s", l, format)
 		self.Logger.Printf(format, v...)
 	}
