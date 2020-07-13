@@ -32,23 +32,32 @@ package lv
 type Minimal interface {
 	GetLevel() Level
 	SetLevel(Level)
+	Print(...interface{})
 	Printf(string, ...interface{})
+	Info(...interface{})
 	Infof(string, ...interface{})
+	Error(...interface{})
 	Errorf(string, ...interface{})
+	Fatal(...interface{})
 	Fatalf(string, ...interface{})
 }
 
 // Standard defines interface of standard leveled logger.
 type Standard interface {
 	Minimal
+	Debug(...interface{})
 	Debugf(string, ...interface{})
+	Warn(...interface{})
 	Warnf(string, ...interface{})
 }
 
 // Granular defines interface of full leveled logger.
 type Granular interface {
 	Standard
+	Trace(...interface{})
 	Tracef(string, ...interface{})
+	Notice(...interface{})
 	Noticef(string, ...interface{})
+	Critical(...interface{})
 	Criticalf(string, ...interface{})
 }
