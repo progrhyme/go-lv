@@ -1,22 +1,24 @@
-package lv
+package lv_test
 
 import (
 	"log"
 	"os"
+
+	"github.com/progrhyme/go-lv"
 )
 
 func Example() {
 	// Using package-level logger
 	name := "Bob"
 	// lv.SetLevel(lv.LDebug) // for debug
-	Infof("Hello, %s!", name)
+	lv.Infof("Hello, %s!", name)
 
 	// Creating a logger
-	logger := New(os.Stderr, LWarn, log.LstdFlags)
+	logger := lv.New(os.Stderr, lv.LWarn, log.LstdFlags)
 	logger.Warn("Something is wrong!")
 }
 
 func ExampleConfigure() {
-	Configure(os.Stderr, LNotice, log.LstdFlags|log.Lshortfile)
-	Noticef("Version is undefined")
+	lv.Configure(os.Stderr, lv.LNotice, log.LstdFlags|log.Lshortfile)
+	lv.Noticef("Version is undefined")
 }

@@ -1,3 +1,9 @@
+## 0.4.1 (2020-07-14)
+
+Misc:
+
+- Improve example codes for understandability.
+
 ## 0.4.0 (2020-07-14)
 
 Enhance: ([#3](https://github.com/progrhyme/go-lv/pull/3))
